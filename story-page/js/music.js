@@ -11,7 +11,7 @@ const basePath = isStoryPage
     : "story-page/music/";    // index.html
 
 // --- Auto-generate track list ---
-const TOTAL_TRACKS = 21; // change if you add more mp3 files
+const TOTAL_TRACKS = 22; // change if you add more mp3 files
 const tracks = Array.from({ length: TOTAL_TRACKS }, (_, i) =>
     `${basePath}track${i + 1}.mp3`
 );
