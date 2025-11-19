@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Man Behind the Tree</title>
+    <link rel="icon" type="image/x-icon" href="../../images/ice.ico">
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html, body {
+            height: 100%;
+            min-height: 100vh;
+        }
+        body {
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a0a1a 50%, #0a0a0a 100%);
+            color: #e0e0e0;
+            font-family: 'VT323', monospace;
+            font-size: 20px;
+            line-height: 1.7;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+        /*--- Snowflake Animation ---*/
+        .snow {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 2;
+            pointer-events: none;
+        }
+        .snowflake {
+            position: absolute;
+            top: -30px;
+            color: #fff;
+            font-size: 1.5em;
+            user-select: none;
+            opacity: 0.7;
+            animation: snowFall linear infinite;
+            will-change: transform;
+        }
+        @keyframes snowFall {
+            to {
+                transform: translateY(110vh) translateX(var(--drift, 0px));
+                opacity: 0.85;
+            }
+        }
+
+        /*--- Cursor Trail ---*/
+        .cursor-trail {
+            position: fixed;
+            pointer-events: none;
+            width: 12px;
+            height: 12px;
+            background: radial-gradient(circle at 6px 6px, #ff4444 80%, transparent 100%);
+            opacity: 0.25;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 9999;
+            animation: fadeTrail 0.5s linear;
+        }
+        @keyframes fadeTrail {
+            from { opacity: 0.25; }
+            to { opacity: 0; }
+        }
+
+        /*--- Container & Story ---*/
+        .container {
+            max-width: 750px;
+            margin: 60px auto 0 auto;
+            background: rgba(10, 0, 10, 0.82);
+            border: 2px solid #252525;
+            border-radius: 14px;
+            box-shadow: 0 6px 40px 0 #000b, 0 1.5px 0 #ff444462;
+            padding: 32px 30px 32px 30px;
+            position: relative;
+            z-index: 10;
+        }
+        .title {
+            font-size: 3em;
+            text-align: center;
+            margin-bottom: 12px;
+            letter-spacing: 2px;
+            text-shadow: 2px 4px 18px #0a0, 0 0 5px #fff1;
+        }
+        .tree-emoji {
+            font-size: 1.1em;
+            filter: drop-shadow(0 1px 3px #0a0a0a);
+        }
+        .subtitle {
+            text-align: center;
+            font-size: 1.3em;
+            color: #ff4444;
+            margin-bottom: 28px;
+            opacity: 0.92;
+        }
+        .story-content {
+            font-size: 1.18em;
+            background: rgba(25, 0, 25, 0.22);
+            border-radius: 7px;
+            padding: 26px 18px 18px 18px;
+            color: #e7e7e7;
+            box-shadow: 0 1px 8px #2f0a1a22;
+        }
+        .glitch-emphasis {
+            color: #ff4444;
+            text-shadow: 1px 0 3px #fff, 0 0 6px #ff444488;
+            letter-spacing: 1.5px;
+            font-size: 1.1em;
+        }
+        .final-creepy-line {
+            margin-top: 44px;
+            text-align: center;
+            font-size: 2em;
+            letter-spacing: 0.18em;
+            color: #ff4444;
+            text-shadow: 0 0 5px #000, 0 0 15px #ff444466;
+            user-select: none;
+        }
+        .final-creepy-line .char {
+            display: inline-block;
+            transition: transform 0.2s;
+        }
+        .final-creepy-line .char:hover {
+            transform: scale(1.27) rotate(-7deg);
+            color: #fff;
+            text-shadow: 0 0 16px #ff4444, 0 0 4px #fff;
+        }
+        .sr-only {
+            position: absolute;
+            left: -10000px;
+            width: 1px;
+            height: 1px;
+            overflow: hidden;
+        }
+
+        /*--- Music Controls ---*/
+        .music-controls {
+            position: fixed;
+            top: 26px;
+            right: 32px;
+            z-index: 1100;
+            background: rgba(0, 0, 0, 0.88);
+            border: 2px solid #333;
+            border-radius: 9px;
+            padding: 11px 16px 11px 13px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1em;
+            box-shadow: 0 2px 12px #0007;
+        }
+        .music-btn {
+            background: #222;
+            color: #fff;
+            border: 1px solid #555;
+            padding: 8px 16px;
+            border-radius: 5px;
+            font-family: 'VT323', monospace;
+            font-size: 1em;
+            cursor: pointer;
+            transition: all 0.3s;
+            outline: none;
+        }
+        .music-btn:hover,
+        .music-btn.playing {
+            background: #004400;
+            border-color: #00aa00;
+            color: #00ff00;
+        }
+        .music-btn:active {
+            background: #222;
+            color: #ff4444;
+        }
+        .volume-slider {
+            width: 100px;
+            accent-color: #ff4444;
+        }
+        .volume-label {
+            color: #ccc;
+            font-size: 14px;
+            font-family: 'VT323', monospace;
+        }
+        .music-info {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%) translateY(24px);
+            background: rgba(0, 0, 0, 0.95);
+            border: 2px solid #ff4444;
+            border-radius: 6px;
+            padding: 11px 22px;
+            font-size: 1em;
+            color: #ff4444;
+            opacity: 0;
+            transition: all 0.5s cubic-bezier(.25,.8,.25,1);
+            z-index: 1100;
+            pointer-events: none;
+        }
+        .music-info.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        /*--- Responsive Design ---*/
+        @media (max-width: 900px) {
+            .container {
+                margin: 38px 12px 0 12px;
+                padding: 18px 7vw 18px 7vw;
+            }
+            .music-controls {
+                right: 10px;
+                top: 12px;
+                padding: 7px 11px 7px 9px;
+                gap: 7px;
+                font-size: 0.95em;
+            }
+            .music-info {
+                padding: 9px 10vw;
+                font-size: 0.96em;
+            }
+        }
+        @media (max-width: 600px) {
+            body {
+                font-size: 17px;
+            }
+            .container {
+                margin: 16vw 2vw 0 2vw;
+                padding: 7vw 2vw 9vw 2vw;
+            }
+            .title {
+                font-size: 2.1em;
+            }
+            .music-controls {
+                top: 4vw;
+                right: 2vw;
+                padding: 6px 7px 6px 6px;
+            }
+            .music-info {
+                left: 5vw;
+                right: 5vw;
+                transform: none;
+                font-size: 0.91em;
+                padding: 7px 6vw;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="../../index.html" class="home-btn glitch-btn" style="position:fixed;top:20px;left:20px;z-index:1000;padding:10px 18px;background:#111;color:#ff6666;border-radius:8px;text-decoration:none;font-weight:bold;box-shadow:0 2px 8px #ff444422;" aria-label="Return to Home">Home</a>
+    <div class="snow" id="snow" aria-hidden="true"></div>
+    
+    <div class="container">
+        <h1 class="title glitch"><span class="tree-emoji">🌲</span> "The Man Behind the Tree"</h1>
+        <div class="subtitle">POV: Kris | Genre: Psychological Horror | Deltarune Fan Story</div>
+        
+        <div class="story-content">
+            <p><span class="glitch-emphasis">You shouldn't be here.</span></p>
+            
+            <p>But your feet are already in the dirt. Knees bent slightly. Hands slack. Bark under your nails. You don't remember walking up to the tree, but here it is. Here you are.</p>
+            
+            <p>The air is quiet, except it isn't. Something hums. Or buzzes. Or rings.</p>
+            
+            <p>You blink.</p>
+            
+            <p style="text-align: center; font-style: italic; color: #ff6666; margin: 20px 0;"><span class="glitch-emphasis">"There is a man here."</span></p>
+            
+            <p>That thought doesn't belong to you. Not really. But it's there, like it's always been there, stapled to the back of your eyes. You're standing in front of the big pine behind the school—no. Not the school. This isn't the schoolyard. The trees are wrong here. Too tall. Too still.</p>
+            
+            <p style="text-align: center; font-style: italic; color: #ff6666; margin: 20px 0;"><span class="glitch-emphasis">"There is a man here."</span></p>
+            
+            <p>Your hands are cold. One of them is holding something.</p>
+            
+            <p>You don't look.</p>
+            
+            <p>You can't look.</p>
+            
+            <p>There's bark beneath your fingertips again. You were scratching. You think. Or maybe clawing. There's a small wound. Yours? Hers?</p>
+            
+            <p style="font-style: italic; color: #ffaaaa;">You were crying.</p>
+            
+            <p>No… no. That's not right.</p>
+            
+            <p style="font-style: italic; color: #ffaaaa;"><span class="glitch-emphasis">She was crying.</span></p>
+            
+            <p>Yes. She was. Behind you. In front of you. By the tree. It's hard to say. The sound's long gone, but the echo's still fresh, like steam in winter.</p>
+            
+            <p>The grass is bent where she stood. You think it was her. Antlers like candle branches. Shoulders curled in. She kept looking behind the tree. You don't remember what you were doing. Maybe you were holding her hand.</p>
+            
+            <p>Or maybe you let go.</p>
+            
+            <p>You can't stop looking at the tree.</p>
+            
+            <p>There's a shape behind it. Not moving. Not breathing. Not—</p>
+            
+            <p>No, wait.</p>
+            
+            <p><span class="glitch-emphasis">It was moving. It was breathing.</span></p>
+            
+            <p>You don't remember seeing its face. But you remember it having one. You remember the way it pressed against the bark, like it wanted to disappear into it. Like it was listening. Or waiting. Or hiding.</p>
+            
+            <p>Dess was afraid. She tugged your sleeve. You didn't move.</p>
+            
+            <p>You don't remember why you didn't move.</p>
+            
+            <p>Maybe you wanted to see what the man would do.</p>
+            
+            <p><span class="glitch-emphasis">You don't remember what he did.</span></p>
+            
+            <p>Just—</p>
+            
+            <p>Darkness. Like something closing. Like a lid. Like an eye.<br>
+            And then…</p>
+            
+            <p>You were standing alone.</p>
+            
+            <p>Your hand was empty. The wind was blowing. The sun was lower than it should've been.<br>
+            Your throat was dry and tight.</p>
+            
+            <p>No antlers. No guitar. No laughter.<br>
+            Just the tree. And you.</p>
+            
+            <p style="text-align: center; font-style: italic; color: #ff6666; margin: 20px 0;"><span class="glitch-emphasis">"Well. There was a man here."</span></p>
+            
+            <p>You're still not sure if that means he's gone.</p>
+            
+            <p>Or if he's just somewhere else now.</p>
+            
+            <p>Behind another tree.</p>
+            
+            <div class="final-creepy-line" id="finalLine" aria-live="polite">
+                <span class="sr-only">Behind you.</span>
+                <span class="char">B</span>
+                <span class="char">e</span>
+                <span class="char">h</span>
+                <span class="char">i</span>
+                <span class="char">n</span>
+                <span class="char">d</span>
+                <span class="char">&nbsp;</span>
+                <span class="char">y</span>
+                <span class="char">o</span>
+                <span class="char">u</span>
+                <span class="char">.</span>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Unified miniplayer (shared music system) -->
+    <div id="miniPlayer" class="player-ddlc undertale-shadow">
+        <button id="playPause" class="btn glitch-effect" data-text="Play">Play</button>
+        <input type="range" id="volume" min="0" max="100" value="40" class="slider">
+        <button id="loopBtn" class="btn pink-pulse">Loop Off</button>
+    </div>
+
+    <script src="../js/music.js" defer></script>
+</body>
+    </html>

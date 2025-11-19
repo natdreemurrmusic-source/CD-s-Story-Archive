@@ -1,0 +1,37 @@
+/* OC Story Page Styles */
+.oc-bg {
+    background: linear-gradient(135deg, #e0f7ff 0%, #fff 100%);
+    color: #0033aa;
+    font-family: 'Arial Rounded MT Bold', Arial, sans-serif;
+}
+.story-container.oc {
+    max-width: 800px;
+    margin: 60px auto;
+    background: rgba(224, 247, 255, 0.92);
+    border-radius: 18px;
+    box-shadow: 0 6px 40px 0 #44aaff, 0 1.5px 0 #0033aa62;
+    padding: 40px 36px;
+}
+.story-title.oc {
+    font-size: 2.7em;
+    text-align: center;
+    margin-bottom: 18px;
+    font-family: 'Arial Rounded MT Bold', Arial, sans-serif;
+    color: #0033aa;
+    text-shadow: 2px 4px 18px #44aaff, 0 0 5px #fff1;
+}
+.story-meta.oc {
+    text-align: center;
+    font-size: 1.2em;
+    color: #44aaff;
+    margin-bottom: 28px;
+    opacity: 0.92;
+}
+.story-content.oc {
+    font-size: 1.18em;
+    background: rgba(224, 247, 255, 0.22);
+    border-radius: 7px;
+    padding: 26px 18px 18px 18px;
+    color: #0033aa;
+    box-shadow: 0 1px 8px #44aaff22;
+}

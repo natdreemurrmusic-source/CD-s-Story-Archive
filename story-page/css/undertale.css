@@ -1,0 +1,37 @@
+/* Undertale/Deltarune Story Page Styles */
+.undertale-bg {
+    background: linear-gradient(135deg, #222 0%, #fff 100%);
+    color: #ffcc00;
+    font-family: 'Determination Mono', monospace;
+}
+.story-container.undertale {
+    max-width: 800px;
+    margin: 60px auto;
+    background: rgba(34, 34, 34, 0.92);
+    border-radius: 18px;
+    box-shadow: 0 6px 40px 0 #ffcc00, 0 1.5px 0 #ffcc0062;
+    padding: 40px 36px;
+}
+.story-title.undertale {
+    font-size: 2.7em;
+    text-align: center;
+    margin-bottom: 18px;
+    font-family: 'Determination Mono', monospace;
+    color: #ffcc00;
+    text-shadow: 2px 4px 18px #fff, 0 0 5px #ffcc00;
+}
+.story-meta.undertale {
+    text-align: center;
+    font-size: 1.2em;
+    color: #fff;
+    margin-bottom: 28px;
+    opacity: 0.92;
+}
+.story-content.undertale {
+    font-size: 1.18em;
+    background: rgba(34, 34, 34, 0.22);
+    border-radius: 7px;
+    padding: 26px 18px 18px 18px;
+    color: #ffcc00;
+    box-shadow: 0 1px 8px #ffcc0022;
+}

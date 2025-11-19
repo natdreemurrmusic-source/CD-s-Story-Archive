@@ -1,0 +1,298 @@
+/* Main styles for Story Hub */
+@font-face {
+    font-family: 'Determination Mono';
+    src: url('../fonts/undertale.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'DDLC Regular';
+    src: url('../fonts/ddlc_regular.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'DDLC Natsuki';
+    src: url('../fonts/ddlc_natsuki.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'DDLC Sayori';
+    src: url('../fonts/ddlc_sayori.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'DDLC Yuri';
+    src: url('../fonts/ddlc_yuri.ttf') format('truetype');
+}
+body {
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #222 0%, #111 100%);
+    color: #f5f5f5;
+    font-family: 'Determination Mono', monospace;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+.main-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 40px 0;
+}
+.glitch-title {
+    position: relative;
+    font-size: 3rem;
+    font-family: 'DDLC Regular', 'Determination Mono', monospace;
+    color: white;
+    text-transform: uppercase;
+    animation: glitch 1.5s infinite;
+}
+
+/* Hero box for index header/subtitle */
+.hero {
+    /* Slightly darker / less translucent so subtitle is easier to read */
+    background: linear-gradient(135deg, rgba(0,0,0,0.65), rgba(255,255,255,0.06));
+    border-radius: 12px;
+    padding: 28px 36px;
+    backdrop-filter: blur(6px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+    border: 1px solid rgba(255,255,255,0.06);
+    max-width: 960px;
+    width: calc(100% - 48px);
+    text-align: center;
+}
+
+.hero .glitch-title { margin: 0 0 8px 0; }
+.hero .subtitle { margin: 0; }
+
+/* Center hero vertically and add entrance animation */
+.main-container { display: flex; align-items: center; justify-content: center; min-height: 100vh; }
+.hero { transform: translateY(8px); opacity: 0; animation: hero-in 700ms ease forwards 150ms; }
+@keyframes hero-in { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+
+/* Background rotator layers */
+#bgContainer {
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    pointer-events: none;
+}
+.bg-layer {
+    position: absolute;
+    inset: 0;
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    opacity: 0;
+    transition: opacity 1.2s ease-in-out;
+}
+.bg-layer.visible { opacity: 1; }
+@keyframes glitch {
+    0% { text-shadow: 2px 2px red; }
+    25% { text-shadow: -2px -2px blue; }
+    50% { text-shadow: 2px -2px green; }
+    75% { text-shadow: -2px 2px yellow; }
+    100% { text-shadow: 2px 2px red; }
+}
+.subtitle {
+    /* Slightly larger for legibility, but never exceed the heading size */
+    font-size: clamp(1.1rem, 0.9vw + 1rem, 1.5rem);
+    margin-bottom: 30px;
+    color: #e0e0e0; /* higher contrast against hero */
+    font-family: 'DDLC Sayori', 'Determination Mono', monospace;
+}
+.story-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    justify-content: center;
+    margin-top: 20px;
+}
+.story-link {
+    padding: 18px 32px;
+    border-radius: 12px;
+    font-size: 1.2em;
+    text-decoration: none;
+    transition: background 0.3s, color 0.3s, box-shadow 0.3s;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+    box-shadow: 0 2px 12px #0007;
+    font-family: 'Determination Mono', monospace;
+    color: #00bcd4;
+}
+.story-link:hover {
+    background: #fff;
+    color: #222;
+    box-shadow: 0 4px 24px #ff44aa88;
+    color: #ff4081;
+    text-shadow: 0 0 8px #ff4081;
+}
+.story-link:focus {
+    outline: 2px solid #ff4081;
+    outline-offset: 4px;
+}
+.story-link.ddlc {
+    background: linear-gradient(90deg, #ffb7e5 0%, #fff 100%);
+    color: #d9006c;
+    font-family: 'DDLC Regular', 'DDLC Sayori', 'DDLC Natsuki', 'DDLC Yuri', cursive;
+}
+.story-link.undertale {
+    background: linear-gradient(90deg, #222 0%, #fff 100%);
+    color: #ffcc00;
+    font-family: 'Determination Mono', monospace;
+}
+.story-link.oc {
+    background: linear-gradient(90deg, #44aaff 0%, #fff 100%);
+    color: #0033aa;
+    font-family: 'Arial Rounded MT Bold', Arial, sans-serif;
+}
+/* Ensure proper text positioning for longer stories */
+.story-text {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    overflow-y: auto;
+    max-height: 80vh;
+    padding: 1rem;
+    background-color: rgba(0, 0, 0, 0.8);
+    border-radius: 8px;
+    color: #f5f5f5;
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+@media (max-width: 700px) {
+    .main-container {
+        padding: 20px 0;
+    }
+    .glitch-title {
+        font-size: 2em;
+    }
+    .story-link {
+        padding: 12px 18px;
+        font-size: 1em;
+    }
+    .story-links {
+        gap: 12px;
+    }
+}
+
+#miniPlayer {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    background: linear-gradient(135deg, #ffbde6 0%, #ffcdea 40%, #222 40%, #000 100%);
+    color: white;
+    padding: 12px 16px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    z-index: 9999;
+    cursor: grab;
+    user-select: none;
+    box-shadow: 0 0 12px #ff58ba, 0 0 18px #8bf3ff inset;
+    backdrop-filter: blur(4px);
+    border: 2px solid #ff9ed6;
+    transition: transform 0.2s ease;
+}
+#miniPlayer:active { cursor: grabbing; transform: scale(0.97); }
+
+#miniPlayer::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: repeating-linear-gradient(
+        to bottom,
+        rgba(255,255,255,0.06) 0px,
+        rgba(255,255,255,0.06) 2px,
+        rgba(0,0,0,0) 3px,
+        rgba(0,0,0,0) 4px
+    );
+    mix-blend-mode: overlay;
+    opacity: 0.6;
+    border-radius: 14px;
+}
+
+.btn {
+    background: #ff82c8;
+    border: none;
+    padding: 8px 14px;
+    color: white;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    text-shadow: 0 0 4px white;
+    transition: 0.15s;
+}
+.btn:hover { background: #ffa6da; transform: scale(1.08); }
+
+.glitch-effect {
+    position: relative;
+}
+.glitch-effect:hover::before,
+.glitch-effect:hover::after {
+    content: attr(data-text);
+    position: absolute;
+    left: 0; top: 0;
+    opacity: 0.6;
+    animation: glitch 0.2s infinite;
+}
+.glitch-effect:hover::before { color: #ff3da9; left: 2px; }
+.glitch-effect:hover::after { color: #6cf4ff; left: -2px; }
+
+@keyframes glitch {
+    0% { transform: translate(0); }
+    20% { transform: translate(-1px, 1px); }
+    40% { transform: translate(1px, -1px); }
+    60% { transform: translate(-1px, -1px); }
+    80% { transform: translate(1px, 1px); }
+    100% { transform: translate(0); }
+}
+
+.pink-pulse {
+    animation: pulse 2s infinite;
+}
+@keyframes pulse {
+    0%, 100% { box-shadow: 0 0 6px #ff9ed6; }
+    50% { box-shadow: 0 0 14px #ff58ba; }
+}
+
+.slider {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 6px;
+    width: 120px;
+    background: #ffbde6;
+    border-radius: 4px;
+    outline: none;
+}
+.slider::-webkit-slider-thumb {
+    appearance: none;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: white;
+    border: 2px solid #ff58ba;
+    cursor: pointer;
+}
+
+/* Glitching button utility - simple color/text-shadow cycle */
+.glitch-btn {
+    display: inline-block;
+    background: linear-gradient(90deg, #111 0%, #1a1a1a 100%);
+    color: #ff6666;
+    padding: 10px 16px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    border: 1px solid rgba(255,102,102,0.12);
+    box-shadow: 0 4px 18px rgba(0,0,0,0.6), 0 0 8px rgba(255,102,102,0.06) inset;
+    transition: transform 0.12s ease, box-shadow 0.12s ease;
+    animation: glitch-color 2.2s infinite linear;
+}
+.glitch-btn:focus { outline: 3px solid rgba(255,102,102,0.18); outline-offset: 4px; }
+
+@keyframes glitch-color {
+    0% { color: #ff6666; text-shadow: 0 0 6px rgba(255,102,102,0.9); transform: translateY(0); }
+    25% { color: #6cf4ff; text-shadow: 0 0 8px rgba(108,244,255,0.9); transform: translateY(-1px); }
+    50% { color: #ffffff; text-shadow: 0 0 10px rgba(255,255,255,0.9); transform: translateY(0); }
+    75% { color: #ff3da9; text-shadow: 0 0 8px rgba(255,61,169,0.9); transform: translateY(1px); }
+    100% { color: #ff6666; text-shadow: 0 0 6px rgba(255,102,102,0.9); transform: translateY(0); }
+}

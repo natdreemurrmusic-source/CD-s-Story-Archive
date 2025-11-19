@@ -1,0 +1,37 @@
+/* DDLC Story Page Styles */
+.ddlc-bg {
+    background: linear-gradient(135deg, #ffe1f7 0%, #fff 100%);
+    color: #d9006c;
+    font-family: 'DDLC Regular', 'DDLC Sayori', 'DDLC Natsuki', 'DDLC Yuri', cursive;
+}
+.story-container.ddlc {
+    max-width: 800px;
+    margin: 60px auto;
+    background: rgba(255, 230, 250, 0.85);
+    border-radius: 18px;
+    box-shadow: 0 6px 40px 0 #ffb7e5, 0 1.5px 0 #d9006c62;
+    padding: 40px 36px;
+}
+.story-title.ddlc {
+    font-size: 2.7em;
+    text-align: center;
+    margin-bottom: 18px;
+    font-family: 'DDLC Natsuki', 'DDLC Sayori', 'DDLC Yuri', cursive;
+    color: #d9006c;
+    text-shadow: 2px 4px 18px #ffb7e5, 0 0 5px #fff1;
+}
+.story-meta.ddlc {
+    text-align: center;
+    font-size: 1.2em;
+    color: #ff44aa;
+    margin-bottom: 28px;
+    opacity: 0.92;
+}
+.story-content.ddlc {
+    font-size: 1.18em;
+    background: rgba(255, 230, 250, 0.22);
+    border-radius: 7px;
+    padding: 26px 18px 18px 18px;
+    color: #d9006c;
+    box-shadow: 0 1px 8px #ffb7e522;
+}
