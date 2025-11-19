@@ -1,0 +1,11 @@
+{
+  "name": "story-page-assets",
+  "version": "1.0.0",
+  "description": "Utility scripts for story-page asset management",
+  "scripts": {
+    "generate-images-manifest": "node scripts/generate-images-manifest.js"
+  },
+  "engines": {
+    "node": ">=14"
+  }
+}

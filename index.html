@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CD's Story Archive</title>
+    <link rel="stylesheet" href="story-page/css/styles.css">
+    <script src="story-page/js/music.js" defer></script>
+    <!-- Use a fun favicon, fallback to nat ico if needed -->
+    <link rel="icon" href="images/nat ico.ico" type="image/x-icon">
+
+</head>
+<body role="document">
+    <!-- Background rotator container (layers are controlled by JS) -->
+    <div id="bgContainer" aria-hidden="true">
+        <div class="bg-layer" id="bgA"></div>
+        <div class="bg-layer" id="bgB"></div>
+    </div>
+
+    <script src="story-page/js/bg-rotator.js" defer></script>
+
+    <div class="main-container" role="main">
+        <div class="hero" role="region" aria-label="site intro">
+            <h1 class="glitch-title" role="heading" aria-level="1">Welcome to CD's Story Archive</h1>
+            <p class="subtitle" role="contentinfo">Explore stories inspired by DDLC, Undertale, and original creations.</p>
+        </div>
+        <div class="story-links" role="navigation">
+            <a href="story-page/html/A%20Different%20Kind%20Of%20Sweet.html" class="story-link ddlc" role="link">A Different Kind Of Sweet</a>
+            <a href="story-page/html/Sorry%20Isn't%20Enough.html" class="story-link undertale" role="link">Sorry Isn't Enough</a>
+            <a href="story-page/html/The%20Chronicles%20Of%20Grim%20Greaser.html" class="story-link oc" role="link">The Chronicles Of Grim Greaser</a>
+            <a href="story-page/html/The%20Legend%20Of%20Shattered%20Light.html" class="story-link undertale" role="link">The Legend Of Shattered Light</a>
+            <a href="story-page/html/THREADS%20IN%20THE%20DARK.html" class="story-link oc" role="link">THREADS IN THE DARK</a>
+            <a href="story-page/html/the_man.html" class="story-link oc" role="link">The Man Behind the Tree</a>
+        </div>
+    </div>
+    <!-- Hybrid DDLC × Undertale Miniplayer -->
+    <div id="miniPlayer" class="player-ddlc undertale-shadow">
+        <button id="playPause" class="btn glitch-effect" data-text="Play">Play</button>
+        <input type="range" id="volume" min="0" max="100" value="40" class="slider">
+        <button id="loopBtn" class="btn pink-pulse">Loop Off</button>
+    </div>
+
+</body>
+</html>
